@@ -1,6 +1,6 @@
-defmodule PortDemo do
+defmodule Top do
   @moduledoc """
-  Documentation for PortDemo.
+  Documentation for Top.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule PortDemo do
 
   ## Examples
 
-      iex> PortDemo.hello
+      iex> Top.hello
       :world
 
   """

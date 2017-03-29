@@ -1,6 +1,6 @@
-defmodule PortDemoTest do
+defmodule TopTest do
   use ExUnit.Case
-  doctest PortDemo
+  doctest Top
 
   test "the truth" do
     assert 1 + 1 == 2
