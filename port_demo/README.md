@@ -1,15 +1,12 @@
 # Top
-
-**TODO: Add description**
+Elixir wrapper for Top, to demonstrate use of ports.
 
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `port_demo` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `port_demo` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:port_demo, "~> 0.1.0"}]
+  [{:port_demo, github: "https://github.com/GeoffreyPS/on_ports/tree/master/port_demo}]
 end
 ```
 
