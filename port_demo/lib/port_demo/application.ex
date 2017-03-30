@@ -13,15 +13,8 @@ defmodule Top.Application do
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Top.Supervisor]
+    opts = [strategy: :one_for_one, name: :top_supervisor]
     Supervisor.start_link(children, opts)
   end
-
-  def report(), do: Top.Server.report()
-
-
-  def report(key), do: Top.Server.report(key)
-
-  def stop(), do: Top.Server.stop
 
 end

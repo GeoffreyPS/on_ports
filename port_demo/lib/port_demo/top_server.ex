@@ -11,8 +11,6 @@ defmodule Top.Server do
 
   def report(key), do: GenServer.call(:top_server, {:report, key})
 
-  def stop(), do: GenServer.cast(:top_server, {:stop})
-
   ## GenServer Implementation
   def init(_) do
     port = Port.open({:spawn, "top -n 0"}, [:binary])
@@ -28,13 +26,11 @@ defmodule Top.Server do
     {:reply, value, state}
   end
 
-  def handle_cast({:stop}, {_map, port} = state) do
-    true = Port.close port
-    GenServer.stop(self(), :normal)
-    {:noreply, state}
+  def handle_call({:resume}, _, _state) do
+    init(nil)
   end
 
-  def handle_info({_from, {:data, payload}}, {_old_state, port}) do
+  def handle_info({port, {:data, payload}}, {_old_state, port}) do
     new_state = Regex.named_captures(@big_dirty_regex, payload)
     {:noreply, {new_state, port}}
   end

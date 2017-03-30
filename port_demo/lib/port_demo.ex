@@ -6,5 +6,4 @@ defmodule Top do
 
   def report(key), do: Top.Server.report(key)
 
-  def stop(), do: Top.Server.stop
 end
