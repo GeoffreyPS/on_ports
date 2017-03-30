@@ -2,17 +2,9 @@ defmodule Top do
   @moduledoc """
   Documentation for Top.
   """
+  def report(), do: Top.Server.report()
 
-  @doc """
-  Hello world.
+  def report(key), do: Top.Server.report(key)
 
-  ## Examples
-
-      iex> Top.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  def stop(), do: Top.Server.stop
 end
