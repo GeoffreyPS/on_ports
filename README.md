@@ -9,6 +9,7 @@ A port is owned by some process and can be communicated to via message passing, 
 
 Ports are OTP compliant, so if you have a port open to a network socket or another application and you tear down part of your supervision structure, the port will be closed gracefully (on the Erlang side, more about that below).
 
+
 ## How does one use ports?
 Elixir has a `Port` module, which is merely a thin wrapper around Erlang's port BIFs.
 
@@ -43,6 +44,7 @@ iex(21)> Port.info cat_port
 nil
 ```
 
+
 ### Rules of ports
 - Be sure to close ports when you're done with them with `Port.close/1`
 - If the external progam exits, the port closes. If a port is closed, the function `Port.info/1` will return `nil`.
@@ -54,9 +56,38 @@ nil
 
 
 ### Implementation
+When wrapping a port in a GenServer, there are a few things to add:
+- Code for opening the port.
+  + I like to include this in the GenServer's `init` function if you're going to have a relationship between your process and external program. 
+  + You would probably want to carry this port identifier with the GenServer's State
+```elixir
+def init(_) do
+    port = Port.open({:spawn, "cmd args"}, [:binary])
+    ## do some other stuff if necessary
+    {:ok, {initial_state, port}}
+  end
+```
+
+- Code for listening/receiving messages on the port:
+```elixir
+  def handle_info({port, {:data, payload}}, {_old_state, port}) do
+    ## do some work here
+    {:noreply, {new_state, port}}
+  end
+```
+
+Check the `/port_demo` directory for a quick implementation of a port wrapped in a GenServer. The key stuff here is included in `top_server.ex`. While this is a contrived example, it should give the basics on how this work on the Elixir/Erlang side.
+
+-----
+#### Note:
+This is a contrived example of wrapping a Unix OS program in a port. If you are simply getting information from a program and reporting back its return result, please use [`System.cmd/3`](https://hexdocs.pm/elixir/System.html#cmd/3) instead. You will save yourself a lot of time. This function also uses ports to fetch information, and it's worthwhile to look at the implementation.
+-----
+
 
 ### Best practices, tips, and thoughts
 - Wrap your port operations in a GenServer to offer a clean API to use the external service within Elixir.
+
+- You can communicate to a port on [3] and [4] instead of STDIN/STDOUT by setting `:nouse_stio` in the list of settings to `Port.open/2`. This is helpful if you want to print information to STDIN/STOUT and not have Erlang catch all of printed messages (say, for debugging).
 
 - If you don't know how your external program will close down, it's a good practice to wrap the command in a bash script. Below is the example from Elixir's recommendation on preventing [Zombie Processes](https://hexdocs.pm/elixir/Port.html#module-zombie-processes).
 ```bash
@@ -71,7 +102,6 @@ kill -KILL $pid
 
 - The data passed between the two programs will be strings or lists of bytes, but can be serialized through something like JSON or whatever lowest common denomenator you have chosen for your project. Additionally, there are language-specific libraries that can convert Erlang terms within the program so you can send/receive messages with `:erlang.term_to_binary/1` and `:erlang.binary_to_term/1`. 
 
-### Further steps
 
 ## References / Further Reading
 - [Elixir Documentation](https://hexdocs.pm/elixir/Port.html)
