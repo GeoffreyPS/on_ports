@@ -34,7 +34,7 @@ defmodule Top.Server do
     {:noreply, state}
   end
 
-  def handle_info({pid, {:data, payload}}, {_old_state, port}) do
+  def handle_info({_from, {:data, payload}}, {_old_state, port}) do
     new_state = Regex.named_captures(@big_dirty_regex, payload)
     {:noreply, {new_state, port}}
   end
