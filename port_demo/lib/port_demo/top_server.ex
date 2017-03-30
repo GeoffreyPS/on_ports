@@ -26,10 +26,6 @@ defmodule Top.Server do
     {:reply, value, state}
   end
 
-  def handle_call({:resume}, _, _state) do
-    init(nil)
-  end
-
   def handle_info({port, {:data, payload}}, {_old_state, port}) do
     new_state = Regex.named_captures(@big_dirty_regex, payload)
     {:noreply, {new_state, port}}
