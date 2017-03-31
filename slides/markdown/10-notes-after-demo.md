@@ -1,0 +1,1 @@
+This is a contrived example of wrapping a Unix OS program in a port. If you are simply getting information from a program and reporting back its return result, please use [`System.cmd/3`](https://hexdocs.pm/elixir/System.html#cmd/3) instead. You will save yourself a lot of time. This function also uses ports to fetch information, and it's worthwhile to look at the implementation.
