@@ -13,7 +13,7 @@ A port is owned by some process and can be communicated to via message passing, 
 Ports are OTP compliant, so if you have a port open to a network socket or another application and you tear down part of your supervision structure, the port will be closed gracefully (on the Erlang side, more about that below).
 
 
-## How does one use ports?
+## Usage
 Elixir has a `Port` module, which is merely a thin wrapper around Erlang's port BIFs.
 
 To open a port, simply use the command `Port.open/2`: 
@@ -48,7 +48,7 @@ nil
 ```
 
 
-### Rules of ports
+### Other functions
 - Be sure to close ports when you're done with them with `Port.close/1`
 - If the external progam exits, the port closes. If a port is closed, the function `Port.info/1` will return `nil`.
 - Ports communicate through sending 2-tuples in the form of {:command, command} and {:data, data}, and can be reached with the `send/2` function from Elixir's `Kernel` module or from `Port.command/3`.
