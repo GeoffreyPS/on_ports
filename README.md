@@ -62,7 +62,7 @@ nil
 When wrapping a port in a GenServer, there are a few things to add:
 - Code for opening the port.
   + I like to include this in the GenServer's `init` function if you're going to have a relationship between your process and external program. 
-  + You would probably want to carry this port identifier with the GenServer's State
+  + You would probably want to carry this port identifier with the GenServer's State.
 ```elixir
 def init(_) do
     port = Port.open({:spawn, "cmd args"}, [:binary])
