@@ -33,5 +33,4 @@ defmodule Top.Server do
 
   def handle_info(_, state), do: {:noreply, state} 
 
-  ## Helper/Private Functions
 end
