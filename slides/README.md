@@ -1,7 +1,7 @@
 # Slides for Ports demo
 Information about Slide library and running reveal.js below.
 
-## Information on reveal.js [![Build Status](https://travis-ci.org/hakimel/reveal.js.svg?branch=master)](https://travis-ci.org/hakimel/reveal.js) <a href="https://slides.com?ref=github"><img src="https://s3.amazonaws.com/static.slid.es/images/slides-github-banner-320x40.png?1" alt="Slides" width="160" height="20"></a>
+## Information on reveal.js
 
 ## Installation
 
@@ -11,14 +11,14 @@ Some reveal.js features, like external Markdown and speaker notes, require that 
 
 1. Install [Node.js](http://nodejs.org/) (4.0.0 or later)
 
-1. Clone the reveal.js repository
+1. Clone the top level repository
    ```sh
-   $ git clone https://github.com/hakimel/reveal.js.git
+   $ git clone git@github.com:GeoffreyPS/on_ports.git
    ```
 
 1. Navigate to the reveal.js folder
    ```sh
-   $ cd reveal.js
+   $ cd slides
    ```
 
 1. Install dependencies
