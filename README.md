@@ -48,7 +48,7 @@ nil
 ### Rules of ports
 - Be sure to close ports when you're done with them with `Port.close/1`
 - If the external progam exits, the port closes. If a port is closed, the function `Port.info/1` will return `nil`.
-- Ports communicate through sending 2-tuples in the form of {:command, command} and {:data, data}, and can be reached with the `send/2` function from Elixir's `Kernel` module.
+- Ports communicate through sending 2-tuples in the form of {:command, command} and {:data, data}, and can be reached with the `send/2` function from Elixir's `Kernel` module or from `Port.command/3`.
 - `:spawn` and `:spawn_executable` are the two settings you will typically use. 
 - `:spawn_executable` is more strict than `:spawn`, and requires a full file path. `:spawn` will do some favors looking in your $PATH environment, but it has some limitations. 
   - `:spawn_driver` and `:fd` are for linked-in drivers and for file descriptors used by the VM, and should be used with extreme caution and good reason.
