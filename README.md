@@ -1,4 +1,7 @@
-# Quick and Dirty on Ports
+# Primer on Ports
+
+## Preface
+The project is divided into two main directories: `port_demo/` for an implementation with a GenServer, and `slides/` for running the reveal.js presentation. See below in this readme for a guide on ports. 
 
 ## Why ports?
 Ports are the safest way to communicate to external programs outside of the BEAM that are local to the machine. 
