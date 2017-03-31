@@ -56,6 +56,7 @@ nil
 - `:spawn_executable` is more strict than `:spawn`, and requires a full file path. `:spawn` will do some favors looking in your $PATH environment, but it has some limitations. 
   - `:spawn_driver` and `:fd` are for linked-in drivers and for file descriptors used by the VM, and should be used with extreme caution and good reason.
 - There are many more settings explained in the Erlang Docs.
+- The process that owns the port connection can transfer its ownership to another process by sending `{self(), {:connect, new_pid}` to the port.
 
 
 ### Implementation
